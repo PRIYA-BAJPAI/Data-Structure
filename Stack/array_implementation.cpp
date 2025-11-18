@@ -40,7 +40,7 @@ int pop(){
 }
 int main(){
     init();
-    push(10);
+     push(10);
     push(20);
     push(30);
     push(40);
