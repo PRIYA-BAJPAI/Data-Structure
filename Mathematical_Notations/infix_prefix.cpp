@@ -70,7 +70,6 @@ void infix_prefix(char infix[],string prefix[]){
             push("(");
         }else if(infix[i]==')'){
             while(top!=NULL && stack_top()!="("){
-                // prefix[j++]=pop();
                 str1=prefix[j-1];
                 str2=prefix[j-2];
                 j=j-2;
@@ -83,7 +82,6 @@ void infix_prefix(char infix[],string prefix[]){
         }
         else{
             while(top!=NULL && prioprity_operator(stack_top()[0])>=prioprity_operator(infix[i])){
-                // prefix[j++]=pop(); 
                 str1=prefix[j-1];
                 str2=prefix[j-2];
                 j=j-2;
@@ -98,7 +96,6 @@ void infix_prefix(char infix[],string prefix[]){
     }
     //pop remaining elements
     while(top!=NULL){
-        // prefix[j++]=pop();
         str1=prefix[j-1];
         str2=prefix[j-2];
         j=j-2;
