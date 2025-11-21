@@ -17,6 +17,6 @@ int main(){
     char A='A';
     char B='B';
     char C='C';
-    Hanoi(n,A,B,C);
+    Hanoi(n,A,C,B);
     return 0;
 }
