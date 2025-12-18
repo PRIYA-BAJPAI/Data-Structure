@@ -36,7 +36,7 @@ void add_node(int x){
 
 void deleteNode(int x){
     temp=root;
-    while(temp->data!=x && temp!=NULL){
+    while(temp!=NULL && temp->data!=x){
         ttemp=temp; //ttemp is parent of temp
         if(temp->data<x){
             temp=temp->right;
@@ -48,10 +48,10 @@ void deleteNode(int x){
     if(temp->left==NULL && temp->right==NULL){
         if(temp==ttemp->right){
             ttemp->right=NULL;
-            // delete temp;
+            delete temp;
         }else{
             ttemp->left=NULL;
-            // delete temp;
+            delete temp;
         }
     }else
     //right=NULL and left!=NULL
@@ -77,6 +77,8 @@ void deleteNode(int x){
             ttemp->left=P;
             delete temp;
         }
+    }else{
+        //neither NULL on right nor in left
     }
 }
 
