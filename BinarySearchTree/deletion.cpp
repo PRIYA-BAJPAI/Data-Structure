@@ -5,9 +5,9 @@ struct BST{
     BST *left;
     BST *right;
 };
-BST *root,*temp,*ttemp,*P;
+BST *root,*temp,*ttemp,*P,*Q;
 void init(){
-    root=temp=ttemp=P=NULL;
+    root=temp=ttemp=P=Q=NULL;
 }
 void create_root(int x){
     root=new BST;
@@ -44,9 +44,17 @@ void deleteNode(int x){
             temp=temp->left;
         }
     }
+    if(temp==NULL){
+        cout<<"Node not found."<<endl;
+        return;
+    }
+
     //if left and right of the node to be deleted is null
     if(temp->left==NULL && temp->right==NULL){
-        if(temp==ttemp->right){
+        if(temp==root){
+            delete root;
+            root=NULL;
+        }else if(temp==ttemp->right){
             ttemp->right=NULL;
             delete temp;
         }else{
@@ -58,7 +66,9 @@ void deleteNode(int x){
     if(temp->left!=NULL && temp->right==NULL){
         P=temp->left;
         temp->left=NULL;
-        if(temp==ttemp->right){                     
+        if(temp==root){
+            root=P;
+        }else if(temp==ttemp->right){                     
             ttemp->right=P;
             delete temp;
         }else{
@@ -70,7 +80,9 @@ void deleteNode(int x){
     if(temp->left==NULL && temp->right!=NULL){
         P=temp->right;
         temp->right=NULL;
-        if(temp==ttemp->right){
+        if(temp==root){
+            root=P;
+        }else if(temp==ttemp->right){
             ttemp->right=P;
             delete temp;
         }else{
@@ -79,6 +91,16 @@ void deleteNode(int x){
         }
     }else{
         //neither NULL on right nor in left
+        Q=temp;
+        P=temp->right;
+        while(P->left!=NULL){
+            Q=P;
+            P=P->left;
+        }
+        temp->data=P->data;
+        Q->left=P->right;
+        P->right=NULL;
+        delete P;
     }
 }
 
@@ -108,7 +130,7 @@ int main(){
     add_node(150);
     add_node(20);
     inorder(root);
-    deleteNode(15);
+    deleteNode(10);
     cout<<endl<<"After deletion : "<<endl;
     inorder(root);
 }
