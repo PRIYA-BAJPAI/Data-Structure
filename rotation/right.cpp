@@ -36,6 +36,7 @@ void add_node(int x){
 
 void right_rotation(int x){
     P=root;
+    ttemp=NULL;
     while(P!=NULL && P->data!=x){
         ttemp=P;
         if(x>P->data){
@@ -52,7 +53,9 @@ void right_rotation(int x){
     temp=Q->right;
     Q->right=P;
     P->left=temp;
-    if(P==ttemp->left){
+    if(ttemp==NULL){
+        root=Q;
+    }else if(P==ttemp->left){
         ttemp->left=Q;
     }else{
         ttemp->right=Q;
@@ -101,7 +104,7 @@ int main(){
     add_node(150);
     add_node(20);
     inorder(root);
-    right_rotation(50);
+    right_rotation(100);
     cout<<endl<<"After rotation : "<<endl;
     cout<<"inorder : ";
     inorder(root);
